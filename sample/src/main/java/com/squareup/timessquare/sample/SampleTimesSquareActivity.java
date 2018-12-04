@@ -32,7 +32,6 @@ public class SampleTimesSquareActivity extends Activity {
   private AlertDialog theDialog;
   private CalendarPickerView dialogView;
   private final Set<Button> modeButtons = new LinkedHashSet<Button>();
-  List<Date> list = new ArrayList<>();
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,19 +39,6 @@ public class SampleTimesSquareActivity extends Activity {
 
     final Calendar nextYear = Calendar.getInstance();
     nextYear.add(Calendar.YEAR, 1);
-
-
-    final Calendar currentCal = Calendar.getInstance();
-    Date current = currentCal.getTime();
-    currentCal.add(Calendar.DAY_OF_MONTH,1);
-    Date tomorrow = currentCal.getTime();
-    currentCal.add(Calendar.DAY_OF_MONTH,1);
-    Date t1 = currentCal.getTime();
-
-    list.add(current);
-    list.add(tomorrow);
-    list.add(t1);
-
 
     final Calendar lastYear = Calendar.getInstance();
     lastYear.add(Calendar.YEAR, -1);
@@ -88,9 +74,8 @@ public class SampleTimesSquareActivity extends Activity {
         calendar.setCustomDayView(new DefaultDayViewAdapter());
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.init(lastYear.getTime(), nextYear.getTime()) //
-            .inMode(SelectionMode.MULTIPLE); //
-            //.withSelectedDate(new Date());
-        calendar.selectDates(list);
+            .inMode(SelectionMode.SINGLE) //
+            .withSelectedDate(new Date());
       }
     });
 
